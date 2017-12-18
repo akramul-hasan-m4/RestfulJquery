@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/bootstrap.css}" />
+<script type="text/javascript" th:src="@{/resources/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/js/bootstrap.js}"></script>
+</head>
+<body>
+
+	<div class="container">
+		<div class="col-md-12" th:if="${sm != null}">
+			<div class="alert alert-success alert-dismissable">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <strong>Success!</strong> <span th:text="${sm}"></span>
+			</div>
+		</div>
+		<div class="col-md-12" th:if="${em != null}">
+			<div class="alert alert-danger alert-dismissable">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <strong>Error!</strong> <span th:text="${em}"></span>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+
+		<form class="form-horizontal panel-group panel-primary" th:action="@{/addUser}" method="POST" th:object="${user1}">
+
+			<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+				<p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+			</div>
+			<!-- Form Name -->
+			<div class="panel-heading text-center">
+				<h1 th:if="${firstName==null}">User Form</h1>
+				<h1 th:if="${firstName!=null}">Update User Info</h1>
+
+			</div>
+			<div class="panel-body">
+				<div class="col-md-offset-2 col-md-4">
+					<br>
+					<!-- Text input-->
+					<div class="form-group">
+
+						<div class="col-md-4">
+							<input id="id" name="id" type="hidden" value="6" placeholder="First name" class="form-control input-md" required="1" />
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="firstName">First Name</label>
+						<div class="col-md-4">
+							<input id="name" name="firstName" type="text" placeholder="First name" class="form-control input-md" required="1" />
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}">
+								<p th:each="err : ${#fields.errors('firstName')}" th:text="${err}"></p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="lastName">Last Name</label>
+						<div class="col-md-4">
+							<input id="lname" name="lastName"  type="text" placeholder="Last name" class="form-control input-md" />
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="email">Email</label>
+						<div class="col-md-4">
+							<input id="email" name="email" type="email" placeholder="someone@example.com" class="form-control input-md" required="1" />
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}">
+								<p th:each="err : ${#fields.errors('email')}" th:text="${err}"></p>
+							</div>
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="password">Password</label>
+						<div class="col-md-4">
+							<input id="password" name="password" type="password" placeholder="Atleast 6 digit/ character" class="form-control input-md" minlength="6" required="1" />
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="phone">Phone</label>
+						<div class="col-md-4">
+							<input id="phone" name="phone" type="number" placeholder="019xxxxxxxx" class="form-control input-md" minlength="11" required="1" />
+						</div>
+					</div>
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="dob">Date of Birth</label>
+						<div class="col-md-4">
+							<input id="dob" name="dob" type="date" placeholder="user name" class="form-control input-md" required="1" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+
+					<br>
+					<!-- Multiple Checkboxes -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="religion">Religion</label>
+						<div class="col-md-4">
+							<div class="checkbox">
+								<label for="Islam"> <input type="checkbox" name="religion" id="Islam" value="Islam"> Islam
+								</label>
+							</div>
+							<div class="checkbox">
+								<label for="Hindu"> <input type="checkbox" name="religion" id="Hindu" value="Hindu"> Hindu
+								</label>
+							</div>
+							<div class="checkbox">
+								<label for="others"> <input type="checkbox" name="religion" id="others" value="others"> Others
+								</label>
+							</div>
+						</div>
+					</div>
+					<!-- Select Basic -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="district">District</label>
+						<div class="col-md-4">
+							<select id="district" name="district" class="form-control" required>
+								<option value="">--select--</option>
+								<option value="Dhaka">Dhaka</option>
+								<option value="Barisal">Barisal</option>
+								<option value="Rajshahi">Rajshahi</option>
+								<option value="Rangpur">Rangpur</option>
+								<option value="Chittagong">Chittagong</option>
+							</select>
+						</div>
+					</div>
+					<!-- Select Multiple -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="hobby">Hobby</label>
+						<div class="col-md-4">
+							<select id="hobby" name="hobby" class="form-control" multiple="multiple" required="true">
+								<option value="Football">Football</option>
+								<option value="Cricket">Cricket</option>
+								<option value="Travelling">Travelling</option>
+							</select>
+						</div>
+					</div>
+					<!-- Multiple Radios (inline) -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="gender">Gender</label>
+						<div class="col-md-4" required="1">
+							<label class="radio-inline" for="Male"> <input type="radio" name="gender" id="Male" value="Male" checked="checked"> Male
+							</label> <label class="radio-inline" for="Female"> <input type="radio" name="gender" id="Female" value="Female"> Female
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer text-center" th:if="${id == null}">
+				<!-- Button -->
+				<button type="submit" class="btn btn-primary">Submit</button>
+				&nbsp; &nbsp; &nbsp;
+				<button type="reset" class="btn btn-danger">Reset</button>
+			</div>
+			<div class="panel-footer text-center" th:if="${id != null}">
+				<!-- Button -->
+				<button type="submit" class="btn btn-primary">Update</button>
+			</div>
+		</form>
+	</div>
+	<div class="container">
+		<h2 style="color: green;">User Data Table</h2>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>DOB</th>
+					<th>Religion</th>
+					<th>District</th>
+					<th>Hobby</th>
+					<th>Gender</th>
+					<th colspan="2">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="userlist :${userlist}">
+					<td th:text="${userlist.id}" />
+					<td th:text="${userlist.firstName}" />
+					<td th:text="${userlist.lastName}" />
+					<td th:text="${userlist.email}" />
+					<td th:text="${userlist.phone}" />
+					<td th:text="${userlist.dob}" />
+					<td th:text="${userlist.religion}" />
+					<td th:text="${userlist.district}" />
+					<td th:text="${userlist.hobby}" />
+					<td th:text="${userlist.gender}" />
+
+					<td><a th:href="@{/editUser/} + ${userlist.id}" class="btn btn-primary">Edit</a></td>
+					<td><a onclick="return confirm('Are you sure to delete this Person?')" th:href="@{/deleteUser/} + ${userlist.id}" class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--${#httpServletRequest.servletPath.equals('/') ? 'active' : ''}  -->
+</body>
+</html>
